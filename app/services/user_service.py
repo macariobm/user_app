@@ -20,7 +20,3 @@ class UserService:
 
     def get_user(self, user: User) -> User:
         return #select * from User WHERE id=':id'
-
-        
-    def get_all_users(self):
-        return #all the database
