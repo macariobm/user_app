@@ -7,8 +7,6 @@ def create_app(test_config=None):
 
     app.register_blueprint(users.user_bp)
 
-    db.init_app(app)
-
     return app
 
 
