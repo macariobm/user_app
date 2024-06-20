@@ -1,37 +1,12 @@
 import sqlite3
-import click
-from flask import current_app, g
 
-def get_db():
-    if 'db' not in g:
-        g.db = sqlite3.connect(
-            current_app.config['DATABASE'],
-            detect_types=sqlite3.PARSE_DECLTYPES
-        )
+schema_file = "~/user_app/app/database/schema.sql"
 
-        g.db.row_factory = sqlite3.Row
+conn = sqlite3.connect('user_app.db', check_same_thread=False)
 
-    return g.db
+with open(schema_file,'r') as f:
+    schema = f.read().decode('utf8')
 
-def close_db():
-    db = g.pop('db', None)
-
-    if db is not None:
-        db.close()
-
-
-def init_db():
-    db = get_db()
-
-    with current_app.open_resource('schema.sql') as f:
-        db.executescript(f.read().decode('utf8'))
-
-@click.command('init-db')
-def init_db_command():
-    init_db() #function will execute 'schema.sql' everytime we 'flask db init'
-    click.echo("Initialized database")
-
-
-def init_app():
-    current_app.teardown_appcontext(close_db)
-    current_app.cli.add_command(init_db_command)
+conn.execute(schema)
+conn.commit()
+conn.close()
