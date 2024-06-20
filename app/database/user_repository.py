@@ -1,10 +1,11 @@
 from datetime import date
 from app.models.user_entity import User
 from app.models.new_user_dto import NewUserDto
+from sqlite3 import Connection
 
 
 class UserRepository():
-    def __init__(self, db_conn):
+    def __init__(self, db_conn: Connection):
         self.db = db_conn
 
     def create_user(self, user: NewUserDto) -> User:
