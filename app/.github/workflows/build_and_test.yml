@@ -1,0 +1,25 @@
+---
+name: build-and-test
+on:
+    pull_request:
+      types:
+          - closed
+      branches:
+          - main
+jobs:
+    build-and-test:
+      if: github.event.pull_request.merged == true
+      runs-on: ubuntu-22.04
+      container: ubuntu-22.04-jammy
+      steps:
+        - name: check out actions
+          uses: actions/checkout@v4
+        - name: setup python
+          uses: actions/setup-python@v5
+          with:
+            python-version: '>=3.8'
+        - name: install dependencies
+          run: |
+            python3 -m pip install --upgrade pip setuptools build
+            pip install pytest 
+            python3 -m build

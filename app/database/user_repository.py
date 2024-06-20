@@ -25,7 +25,7 @@ class UserRepository():
 
     def delete_user(self, user_id: int) -> User:
         sql = """
-        DELETE FROM users WHERE id=:id
+        DELETE * FROM users WHERE id=:id
         """
 
         cursor = self.db.cursor()
@@ -36,3 +36,18 @@ class UserRepository():
         deleted_user = User(id=res['id'], name=res['name'], location=res['location'])
         cursor.close()
         return deleted_user
+    
+
+    def get_user(self, user_id: int) -> User:
+        sql = """
+        SELECT * FROM users WHERE id=:id
+        """
+
+        cursor = self.db.cursor()
+        cursor.execute(sql, {'id': user_id})
+        self.db.commit()
+
+        res = cursor.fetchone()
+        cursor.close()
+        user = User(id=res['id'], name=res['name'], location=res['location'])
+        return user
