@@ -9,5 +9,5 @@ with open(schema_file,'r') as f:
     schema = f.read()
 
 cursor.execute(schema)
-cursor.commit()
-cursor.close()
+conn.commit()
+conn.close()
