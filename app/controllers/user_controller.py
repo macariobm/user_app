@@ -8,7 +8,7 @@ class UserController():
         self.request = request
         self.service = user_service
 
-    def create_user(self):
+    def create_user(self, new_user: NewUserDto):
         new_user = NewUserDto(name=self.request.json['name'])
 
         user = self.service.create_user(new_user)
