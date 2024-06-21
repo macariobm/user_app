@@ -52,3 +52,29 @@ class UserRepository():
         cursor.close()
         user = User(id=res['id'], name=res['name'], location=res['location'])
         return user
+
+    def update_user(self, user: User) -> User:
+        sql = """
+        UPDATE users
+        SET name=:name, location=:location
+        WHERE id=:id
+        """
+
+        cursor = self.db.cursor()
+        cursor.execute(sql, {'id': user.id, 'name': user.name, 'location': user.location })
+        self.db.commit()
+
+        user = self.get_user(id=user.id)
+        return user
+    
+    def get_users(self):
+        sql = """
+        SELECT * from users
+        """
+
+        cursor = self.db.cursor()
+        cursor.execute(sql)
+        self.db.commit()
+
+        res = cursor.fetchall()
+        return res

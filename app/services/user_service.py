@@ -12,13 +12,16 @@ class UserService:
         return user
 
     def update_user(self, user: User) -> User:
-        return 
+        return self.user_repository.update_user(user)
     
-    def delete_user(self, del_user: User) -> User:
-        user = self.user_repository.delete_user(del_user)
+    def delete_user(self, id) -> User:
+        user = self.user_repository.delete_user(id)
         return user
 
 
-    def get_user(self, user_id: User) -> User:
-        user = self.user_repository.get_user(user_id)
+    def get_user(self, id) -> User:
+        user = self.user_repository.get_user(id)
         return user
+    
+    def get_users(self):
+        return self.user_repository.get_users()
