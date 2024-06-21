@@ -10,21 +10,19 @@ class UserRepository():
 
     def create_user(self, user: NewUserDto) -> User:
         sql = """
-        INSERT INTO users (id, name, location)
-        VALUES (:id, :name, :location)
-        RETURNING id, name, location
+        INSERT INTO users (name, location)
+        VALUES (:name, :location)
         """
 
         cursor = self.db.cursor()
-        cursor.execute(sql, {'id': user.id, 'name': user.name, 'location': user.location})
+        cursor.execute(sql, {'name': user.name, 'location': user.location})
         self.db.commit()
 
         res = cursor.fetchone()
-        created_user = User(id=res['id'], name=res['name'], locations=res['location'])
-        cursor.close()
+        created_user = self.get_user(id=res[0], name=res[1], locations=res[2])
         return created_user
 
-    def delete_user(self, user_id: int) -> User:
+    def delete_user(self, user_id: int) -> bool:
         sql = """
         DELETE * FROM users WHERE id=:id
         """
@@ -35,7 +33,6 @@ class UserRepository():
 
         res = cursor.fetchone()
         deleted_user = User(id=res['id'], name=res['name'], location=res['location'])
-        cursor.close()
         return deleted_user
     
 
@@ -49,7 +46,6 @@ class UserRepository():
         self.db.commit()
 
         res = cursor.fetchone()
-        cursor.close()
         user = User(id=res['id'], name=res['name'], location=res['location'])
         return user
 

@@ -10,4 +10,3 @@ with open(schema_file,'r') as f:
 
 cursor.execute(schema)
 conn.commit()
-conn.close()
