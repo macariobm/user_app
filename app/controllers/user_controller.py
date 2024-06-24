@@ -17,12 +17,13 @@ class UserController():
         return jsonify([vars(user)]), 201
     
 
-    def delete_user(self):
-        user = self.service.delete_user(id=self.request.json['id'])
-        return jsonify([vars(user)]), 200
+    def delete_user(self, id: int):
+        self.service.delete_user(id)
+        return '', 200
+        
     
-    def get_user(self):
-        user = self.service.get_user(id=self.request.json['id'])
+    def get_user(self, id: int):
+        user = self.service.get_user(id)
         return jsonify([vars(user)]), 200
     
     def update_user(self, id):
