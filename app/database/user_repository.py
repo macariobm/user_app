@@ -62,11 +62,11 @@ class UserRepository():
     
     def get_users(self):
         sql = """
-        SELECT * from users
+        SELECT id, name, location from users
+        WHERE id > 0
         """
 
         cursor = self.db.cursor()
-        cursor.execute(sql)
-
-        res = cursor.fetchall()
-        return res
+        res = cursor.execute(sql).fetchall()
+        return map(lambda result : User(id=result[0], name=result[1], location=result[2]), res)
+        
