@@ -1,6 +1,6 @@
 import sqlite3
 
-schema_file = "/home/macario/user_app/app/database/schema.sql"
+schema_file = "$HOME/user_app/app/database/schema.sql"
 
 conn = sqlite3.connect('user_app.db', check_same_thread=False)
 cursor = conn.cursor()
