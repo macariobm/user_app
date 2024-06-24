@@ -27,7 +27,7 @@ class UserController():
         return jsonify([vars(user)]), 200
     
     def update_user(self, id):
-        updated_user = self.service.update_user(User(id=self.request.json['id'], name=self.request.json['name'], location=self.request.json['location']))
+        updated_user = self.service.update_user(User(id=id, name=self.request.json['name'], location=self.request.json['location']))
 
         return jsonify(vars(updated_user)), 200
     
