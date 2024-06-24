@@ -8,8 +8,7 @@ class UserService:
         self.user_repository = user_repository
 
     def create_user(self, new_user: NewUserDto) -> User:
-        user = self.user_repository.create_user(new_user)
-        return user
+        return self.user_repository.create_user(new_user)
 
     def update_user(self, user: User) -> User:
         return self.user_repository.update_user(user)

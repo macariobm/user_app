@@ -1,7 +1,6 @@
-from datetime import date
 from app.models.user_entity import User
 from app.models.new_user_dto import NewUserDto
-from sqlite3 import Connection
+from sqlite3 import Connection, Row
 
 
 class UserRepository():
@@ -13,13 +12,12 @@ class UserRepository():
         INSERT INTO users (name, location)
         VALUES (:name, :location)
         """
-
+        self.db.row_factory = Row
         cursor = self.db.cursor()
         cursor.execute(sql, {'name': user.name, 'location': user.location})
+        user_id = cursor.lastrowid
         self.db.commit()
-
-        res = cursor.fetchone()
-        created_user = self.get_user(id=res[0], name=res[1], locations=res[2])
+        created_user = self.get_user(user_id=user_id)
         return created_user
 
     def delete_user(self, user_id: int) -> bool:
