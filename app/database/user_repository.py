@@ -2,6 +2,7 @@ import psycopg2
 from psycopg2 import NamedTupleCursor
 from app.models.user_entity import User
 from app.models.new_user_dto import NewUserDto
+from database import db
 #from sqlite3 import Connection, Row
 
 
@@ -14,7 +15,6 @@ class UserRepository():
         INSERT INTO users (name, location)
         VALUES (:name, :location)
         """
-        self.db.row_factory = Row
         cursor = self.db.cursor()
         cursor.execute(sql, {'name': user.name, 'location': user.location})
         user_id = cursor.lastrowid
@@ -26,7 +26,6 @@ class UserRepository():
         sql = """
         DELETE FROM users WHERE id=:id
         """
-        self.db.row_factory = Row
         cursor = self.db.cursor()
         cursor.execute(sql, {'id': id})
         id = cursor.lastrowid
@@ -41,7 +40,6 @@ class UserRepository():
         sql = """
         SELECT * FROM users WHERE id=:id
         """
-        self.db.row_factory = Row
         cursor = self.db.cursor()
         cursor.execute(sql, {'id': user_id})
         row = cursor.fetchone()
