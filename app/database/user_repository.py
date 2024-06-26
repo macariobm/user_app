@@ -1,6 +1,8 @@
+import psycopg2
+from psycopg2 import NamedTupleCursor
 from app.models.user_entity import User
 from app.models.new_user_dto import NewUserDto
-from sqlite3 import Connection, Row
+#from sqlite3 import Connection, Row
 
 
 class UserRepository():
