@@ -1,5 +1,5 @@
 import psycopg2
-from psycopg2 import DictCursor
+from psycopg2.extra import DictCursor
 import os
 
 #fix the path to schema.sql, make it not hardcoded 
