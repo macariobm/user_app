@@ -3,7 +3,7 @@ from psycopg2.extras import DictCursor
 import os
 
 #fix the path to schema.sql, make it not hardcoded 
-schema_file = f"{HOME}/user_app/app/database/schema.sql"
+schema_file = f"$HOME/user_app/app/database/schema.sql"
 
 conn = psycopg2.connect(host='localhost',
                        database='user_app',
