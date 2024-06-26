@@ -1,13 +1,13 @@
 import psycopg2
-from psycopg2 import connection
+from psycopg2 import connect
 from app.models.user_entity import User
 from app.models.new_user_dto import NewUserDto
 from database import db
-#from sqlite3 import Connection, Row
+
 
 
 class UserRepository():
-    def __init__(self, db_conn: connection):
+    def __init__(self, db_conn: connect):
         self.db = db_conn
 
     def create_user(self, user: NewUserDto) -> User:
