@@ -1,10 +1,13 @@
-import sqlite3
+import psycopg2
 import os
 
 #fix the path to schema.sql, make it not hardcoded 
 schema_file = f"{HOME}/user_app/app/database/schema.sql"
 
-conn = sqlite3.connect('user_app.db', check_same_thread=False)
+conn = psycopg2.connect(host='localhost',
+                       database='user_app',
+                       user=os.environ['POSTGRES_USER'],
+                       password=os.environ['POSTGRES_PASSWORD'])
 cursor = conn.cursor()
 
 with open(schema_file,'r') as f:
