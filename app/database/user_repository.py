@@ -1,5 +1,5 @@
 import psycopg2
-from psycopg2 import NamedTupleCursor
+from psycopg2 import connection
 from app.models.user_entity import User
 from app.models.new_user_dto import NewUserDto
 from database import db
@@ -7,7 +7,7 @@ from database import db
 
 
 class UserRepository():
-    def __init__(self, db_conn: Connection):
+    def __init__(self, db_conn: connection):
         self.db = db_conn
 
     def create_user(self, user: NewUserDto) -> User:

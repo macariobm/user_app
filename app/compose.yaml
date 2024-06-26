@@ -1,7 +1,7 @@
 services:
   postgresql:
     volumes: 
-      - db_data: #add volumes later on
+      - db_data:volumes
     image: postgres
     restart: always
     ports:
