@@ -1,4 +1,3 @@
-import psycopg2
 from psycopg2 import connect
 from app.models.user_entity import User
 from app.models.new_user_dto import NewUserDto
