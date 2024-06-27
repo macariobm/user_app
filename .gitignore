@@ -1,5 +1,7 @@
 venv/
 
+amb/
+
 *.pyc
 __pycache__/
 
